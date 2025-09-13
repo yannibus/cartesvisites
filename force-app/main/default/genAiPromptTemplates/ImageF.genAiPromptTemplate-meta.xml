@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>Nbmc8FWOiTBvbnapK4J6dlo9yvj7XQkaH8/wdXW32U0=_2</activeVersionIdentifier>
+    <developerName>ImageF</developerName>
+    <masterLabel>ImageF</masterLabel>
+    <templateVersions>
+        <content>Tu es un specialiste d&apos;analyse de la carte de visite.
+Tu dois analyser l&apos;image que je te donne dans laquelle il y a une carte de visite pour isoler les informations importantes contenue dans une carte de visite B2B ou B2C.
+Tu dois produire en sortie les élements suivant au format JSON : 
+Nom
+Prénom
+Entreprise
+Email
+Adresse
+Telephone 1
+Telephone 2
+
+Si une information n&apos;est pas disponible, mets N/A.
+
+L&apos;image à analyser est la suivante : {!$Input:ImageF.Id}
+
+</content>
+        <inputs>
+            <apiName>ImageF</apiName>
+            <definition>SOBJECT://ContentDocument</definition>
+            <masterLabel>ImageF</masterLabel>
+            <referenceName>Input:ImageF</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultGPT4Omni</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>Nbmc8FWOiTBvbnapK4J6dlo9yvj7XQkaH8/wdXW32U0=_1</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>Tu es un specialiste d&apos;analyse de la carte de visite.
+Tu dois analyser l&apos;image que je te donne dans laquelle il y a une carte de visite pour isoler les informations importantes contenue dans une carte de visite B2B ou B2C.
+Tu dois produire en sortie les élements suivant au format JSON : Delete the &quot;```json&quot; at the beginning of the prompt, and delete the &quot;```&quot; at the end of the prompt.
+firstName
+lastName
+email
+mobile
+phone
+
+Si une information n&apos;est pas disponible, mets N/A. Pour le Mobile met ce qui te semble le plus correspondre à un numéro de téléphone portable. Pour le Phone met ce qui te semble correspondre au numéro de téléphone fixe. Au cas ou tu ne sais pas différencier, met le 1er numéro trouvé dans Mobile et si il en en a un second dans Phone. met le prénom en firstName et le Nom en lastName
+L&apos;image à analyser est la suivante : {!$Input:ImageF.Id}
+
+</content>
+        <inputs>
+            <apiName>ImageF</apiName>
+            <definition>SOBJECT://ContentDocument</definition>
+            <masterLabel>ImageF</masterLabel>
+            <referenceName>Input:ImageF</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultGPT4Omni</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>Nbmc8FWOiTBvbnapK4J6dlo9yvj7XQkaH8/wdXW32U0=_2</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>
