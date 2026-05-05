@@ -3,38 +3,71 @@ public class CV_PromptJsonParser {
     @InvocableMethod(label='Parse Contact JSON from Prompt' description='Parses JSON string and returns contact fields.')
     public static List<Result> parseJson(List<String> jsonInputs) {
         List<Result> results = new List<Result>();
-        if (jsonInputs != null && !jsonInputs.isEmpty()) {
-            String jsonString = jsonInputs[0];
-            // Add null check for jsonString
-            if (String.isBlank(jsonString)) {
-                System.debug('Input JSON string is blank.');
-                 results.add(new Result()); // Return empty result
-                 return results;
-            }
-            try {
-                Map<String, Object> data = (Map<String, Object>) JSON.deserializeUntyped(jsonString);
-
-                Result res = new Result();
-                // Add null checks for map keys before casting
-                res.outputFirstName = data.containsKey('firstName') ? (String)data.get('firstName') : null;
-                res.outputLastName = data.containsKey('lastName') ? (String)data.get('lastName') : null;
-                res.outputEmail = data.containsKey('email') ? (String)data.get('email') : null;
-                res.outputMobile = data.containsKey('mobile') ? (String)data.get('mobile') : null;
-                res.outputPhone = data.containsKey('phone') ? (String)data.get('phone') : null;
-                // Add other fields as needed
-                results.add(res);
-
-            } catch (Exception e) {
-                // Handle parsing error (e.g., return null values or throw exception)
-                System.debug('Error parsing JSON: ' + e.getMessage() + ' for JSON: ' + jsonString);
-                 // Optionally create a result indicating error, or just return empty
-                 results.add(new Result()); // Return empty result on error
-            }
-        } else {
-             System.debug('Input JSON list is null or empty.');
-             results.add(new Result()); // Return empty result
+        if (jsonInputs == null || jsonInputs.isEmpty()) {
+            results.add(new Result());
+            return results;
         }
+        results.add(toResult(parseOne(jsonInputs[0])));
         return results;
+    }
+
+    public static ParsedCard parseOne(String jsonString) {
+        ParsedCard card = new ParsedCard();
+        if (String.isBlank(jsonString)) {
+            return card;
+        }
+
+        String cleaned = stripCodeFences(jsonString);
+
+        try {
+            Map<String, Object> data = (Map<String, Object>) JSON.deserializeUntyped(cleaned);
+            card.firstName = readString(data, 'firstName');
+            card.lastName  = readString(data, 'lastName');
+            card.email     = readString(data, 'email');
+            card.mobile    = readString(data, 'mobile');
+            card.phone     = readString(data, 'phone');
+            card.company   = readString(data, 'company');
+        } catch (Exception e) {
+            System.debug('CV_PromptJsonParser error: ' + e.getMessage() + ' | raw: ' + jsonString);
+            card.errorMessage = e.getMessage();
+        }
+        return card;
+    }
+
+    private static String stripCodeFences(String raw) {
+        String s = raw.trim();
+        if (s.startsWith('```')) {
+            s = s.replaceFirst('^```(?:json)?\\s*', '');
+            s = s.replaceFirst('\\s*```\\s*$', '');
+        }
+        return s;
+    }
+
+    private static String readString(Map<String, Object> data, String key) {
+        if (!data.containsKey(key) || data.get(key) == null) return null;
+        String v = String.valueOf(data.get(key));
+        if (String.isBlank(v) || v.equalsIgnoreCase('N/A')) return null;
+        return v;
+    }
+
+    private static Result toResult(ParsedCard card) {
+        Result r = new Result();
+        r.outputFirstName = card.firstName;
+        r.outputLastName  = card.lastName;
+        r.outputEmail     = card.email;
+        r.outputMobile    = card.mobile;
+        r.outputPhone     = card.phone;
+        return r;
+    }
+
+    public class ParsedCard {
+        public String firstName;
+        public String lastName;
+        public String email;
+        public String mobile;
+        public String phone;
+        public String company;
+        public String errorMessage;
     }
 
     public class Result {
@@ -46,12 +79,11 @@ public class CV_PromptJsonParser {
 
         @InvocableVariable(label='Email' description='Extracted Email')
         public String outputEmail;
-        
-         @InvocableVariable(label='Mobile' description='Extracted Mobile')
+
+        @InvocableVariable(label='Mobile' description='Extracted Mobile')
         public String outputMobile;
-        
-         @InvocableVariable(label='Phone' description='Extracted Phone')
+
+        @InvocableVariable(label='Phone' description='Extracted Phone')
         public String outputPhone;
-         // Add other fields as needed
     }
 }

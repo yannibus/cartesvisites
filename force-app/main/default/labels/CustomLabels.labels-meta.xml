@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>CV_Title</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Main component title</shortDescription>
+        <value>Business Cards → Leads</value>
+    </labels>
+    <labels>
+        <fullName>CV_Subtitle</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Subtitle under the main title</shortDescription>
+        <value>Drop your business cards, AI extracts the contact data, you validate and create Leads in one click.</value>
+    </labels>
+    <labels>
+        <fullName>CV_CounterReadyOf</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Counter label "ready of total"</shortDescription>
+        <value>ready of</value>
+    </labels>
+    <labels>
+        <fullName>CV_AddMore</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Button to add more cards</shortDescription>
+        <value>Add more cards</value>
+    </labels>
+    <labels>
+        <fullName>CV_ClearAll</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Button to clear all cards</shortDescription>
+        <value>Clear all</value>
+    </labels>
+    <labels>
+        <fullName>CV_CreateLeads</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Generic create leads button</shortDescription>
+        <value>Create Leads</value>
+    </labels>
+    <labels>
+        <fullName>CV_CreateLead_Singular</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Create 1 lead button prefix</shortDescription>
+        <value>Create 1 Lead</value>
+    </labels>
+    <labels>
+        <fullName>CV_CreateLeads_PluralPrefix</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Create N leads button prefix (use with count)</shortDescription>
+        <value>Create</value>
+    </labels>
+    <labels>
+        <fullName>CV_CreateLeads_PluralSuffix</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Create N leads button suffix</shortDescription>
+        <value>Leads</value>
+    </labels>
+    <labels>
+        <fullName>CV_Analyzing</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Analyzing cards in progress message</shortDescription>
+        <value>Analyzing cards...</value>
+    </labels>
+    <labels>
+        <fullName>CV_ProcessingAlt</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Processing spinner alt text</shortDescription>
+        <value>Processing</value>
+    </labels>
+    <labels>
+        <fullName>CV_ReadyInfo_Singular</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>1 card ready to be created message</shortDescription>
+        <value>1 card ready to be created.</value>
+    </labels>
+    <labels>
+        <fullName>CV_ReadyInfo_PluralSuffix</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>N cards ready message suffix</shortDescription>
+        <value>cards ready to be created.</value>
+    </labels>
+    <labels>
+        <fullName>CV_Drop_Title</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Drop zone title</shortDescription>
+        <value>Drop your business cards here</value>
+    </labels>
+    <labels>
+        <fullName>CV_Drop_Hint</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Drop zone hint</shortDescription>
+        <value>or click to browse — JPG, PNG, HEIC — multiple files supported</value>
+    </labels>
+    <labels>
+        <fullName>CV_Card_Remove</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Remove card button</shortDescription>
+        <value>Remove</value>
+    </labels>
+    <labels>
+        <fullName>CV_Card_RemoveTooltip</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Remove card tooltip</shortDescription>
+        <value>Remove this card</value>
+    </labels>
+    <labels>
+        <fullName>CV_Card_Retry</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Retry button</shortDescription>
+        <value>Retry</value>
+    </labels>
+    <labels>
+        <fullName>CV_Card_FirstName</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>First name input label</shortDescription>
+        <value>First Name</value>
+    </labels>
+    <labels>
+        <fullName>CV_Card_LastName</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Last name input label</shortDescription>
+        <value>Last Name</value>
+    </labels>
+    <labels>
+        <fullName>CV_Card_Company</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Company input label</shortDescription>
+        <value>Company</value>
+    </labels>
+    <labels>
+        <fullName>CV_Card_Email</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email input label</shortDescription>
+        <value>Email</value>
+    </labels>
+    <labels>
+        <fullName>CV_Card_Mobile</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Mobile input label</shortDescription>
+        <value>Mobile</value>
+    </labels>
+    <labels>
+        <fullName>CV_Card_Phone</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Phone input label</shortDescription>
+        <value>Phone</value>
+    </labels>
+    <labels>
+        <fullName>CV_Card_SeeLead</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Link to created lead</shortDescription>
+        <value>View Lead</value>
+    </labels>
+    <labels>
+        <fullName>CV_Status_Uploading</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Uploading status badge</shortDescription>
+        <value>Uploading...</value>
+    </labels>
+    <labels>
+        <fullName>CV_Status_Processing</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Processing status badge</shortDescription>
+        <value>AI Analysis...</value>
+    </labels>
+    <labels>
+        <fullName>CV_Status_Ready</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Ready status badge</shortDescription>
+        <value>Ready to create</value>
+    </labels>
+    <labels>
+        <fullName>CV_Status_Error</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error status badge</shortDescription>
+        <value>Error</value>
+    </labels>
+    <labels>
+        <fullName>CV_Status_Created</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Created status badge</shortDescription>
+        <value>Lead created</value>
+    </labels>
+    <labels>
+        <fullName>CV_Status_Idle</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Default idle status</shortDescription>
+        <value>Pending</value>
+    </labels>
+    <labels>
+        <fullName>CV_Toast_SuccessTitle</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Success toast title</shortDescription>
+        <value>Success</value>
+    </labels>
+    <labels>
+        <fullName>CV_Toast_ErrorTitle</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error toast title</shortDescription>
+        <value>Error</value>
+    </labels>
+    <labels>
+        <fullName>CV_Toast_LeadCreatedSingular</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>1 lead created toast message</shortDescription>
+        <value>1 Lead created.</value>
+    </labels>
+    <labels>
+        <fullName>CV_Toast_LeadCreatedPluralSuffix</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>N leads created toast message suffix</shortDescription>
+        <value>Leads created.</value>
+    </labels>
+    <labels>
+        <fullName>CV_Error_AnalysisFailed</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Generic analysis error</shortDescription>
+        <value>Analysis failed</value>
+    </labels>
+</CustomLabels>

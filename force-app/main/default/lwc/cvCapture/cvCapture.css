@@ -1,0 +1,93 @@
+.cv-capture {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 1.25rem;
+    background: var(--slds-g-color-surface-1, #fff);
+    border-radius: var(--slds-g-radius-border-3, 0.75rem);
+    border: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+}
+
+.cv-capture__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.cv-capture__title {
+    margin: 0;
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: var(--slds-g-color-neutral-base-10, #181818);
+    letter-spacing: -0.01em;
+}
+
+.cv-capture__subtitle {
+    margin: 0.25rem 0 0;
+    color: var(--slds-g-color-neutral-base-50, #444);
+    font-size: 0.875rem;
+}
+
+.cv-capture__counter {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 0.5rem 0.875rem;
+    background: var(--slds-g-color-accent-container-3, #eaf5fe);
+    border-radius: var(--slds-g-radius-border-2, 0.5rem);
+    border: 1px solid var(--slds-g-color-accent-container-2, #b4defb);
+}
+
+.cv-capture__counter-num {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--slds-g-color-accent-container-1, #0176d3);
+}
+
+.cv-capture__counter-label {
+    font-size: 0.75rem;
+    color: var(--slds-g-color-neutral-base-50, #444);
+    margin-top: 0.125rem;
+}
+
+.cv-capture__toolbar {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.cv-capture__hidden-input {
+    display: none;
+}
+
+.cv-capture__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+    gap: 1rem;
+}
+
+.cv-capture__footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.875rem 1rem;
+    background: var(--slds-g-color-surface-container-1, #fafafa);
+    border-top: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+    border-radius: var(--slds-g-radius-border-2, 0.5rem);
+    flex-wrap: wrap;
+}
+
+.cv-capture__footer-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--slds-g-color-neutral-base-50, #444);
+    font-size: 0.875rem;
+}

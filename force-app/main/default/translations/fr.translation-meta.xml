@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Translations xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customLabels>
+        <label>Cartes de visite → Leads</label>
+        <name>CV_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>Déposez vos cartes, l'IA extrait les coordonnées, vous validez et créez les Leads en un clic.</label>
+        <name>CV_Subtitle</name>
+    </customLabels>
+    <customLabels>
+        <label>prêtes sur</label>
+        <name>CV_CounterReadyOf</name>
+    </customLabels>
+    <customLabels>
+        <label>Ajouter d'autres cartes</label>
+        <name>CV_AddMore</name>
+    </customLabels>
+    <customLabels>
+        <label>Tout effacer</label>
+        <name>CV_ClearAll</name>
+    </customLabels>
+    <customLabels>
+        <label>Créer les Leads</label>
+        <name>CV_CreateLeads</name>
+    </customLabels>
+    <customLabels>
+        <label>Créer 1 Lead</label>
+        <name>CV_CreateLead_Singular</name>
+    </customLabels>
+    <customLabels>
+        <label>Créer</label>
+        <name>CV_CreateLeads_PluralPrefix</name>
+    </customLabels>
+    <customLabels>
+        <label>Leads</label>
+        <name>CV_CreateLeads_PluralSuffix</name>
+    </customLabels>
+    <customLabels>
+        <label>Analyse des cartes en cours...</label>
+        <name>CV_Analyzing</name>
+    </customLabels>
+    <customLabels>
+        <label>Traitement en cours</label>
+        <name>CV_ProcessingAlt</name>
+    </customLabels>
+    <customLabels>
+        <label>1 carte prête à être créée.</label>
+        <name>CV_ReadyInfo_Singular</name>
+    </customLabels>
+    <customLabels>
+        <label>cartes prêtes à être créées.</label>
+        <name>CV_ReadyInfo_PluralSuffix</name>
+    </customLabels>
+    <customLabels>
+        <label>Déposez vos cartes de visite</label>
+        <name>CV_Drop_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>ou cliquez pour parcourir — JPG, PNG, HEIC — plusieurs à la fois</label>
+        <name>CV_Drop_Hint</name>
+    </customLabels>
+    <customLabels>
+        <label>Retirer</label>
+        <name>CV_Card_Remove</name>
+    </customLabels>
+    <customLabels>
+        <label>Retirer cette carte</label>
+        <name>CV_Card_RemoveTooltip</name>
+    </customLabels>
+    <customLabels>
+        <label>Réessayer</label>
+        <name>CV_Card_Retry</name>
+    </customLabels>
+    <customLabels>
+        <label>Prénom</label>
+        <name>CV_Card_FirstName</name>
+    </customLabels>
+    <customLabels>
+        <label>Nom</label>
+        <name>CV_Card_LastName</name>
+    </customLabels>
+    <customLabels>
+        <label>Société</label>
+        <name>CV_Card_Company</name>
+    </customLabels>
+    <customLabels>
+        <label>Email</label>
+        <name>CV_Card_Email</name>
+    </customLabels>
+    <customLabels>
+        <label>Mobile</label>
+        <name>CV_Card_Mobile</name>
+    </customLabels>
+    <customLabels>
+        <label>Téléphone</label>
+        <name>CV_Card_Phone</name>
+    </customLabels>
+    <customLabels>
+        <label>Voir la Lead</label>
+        <name>CV_Card_SeeLead</name>
+    </customLabels>
+    <customLabels>
+        <label>Téléchargement...</label>
+        <name>CV_Status_Uploading</name>
+    </customLabels>
+    <customLabels>
+        <label>Analyse IA...</label>
+        <name>CV_Status_Processing</name>
+    </customLabels>
+    <customLabels>
+        <label>Prête à créer</label>
+        <name>CV_Status_Ready</name>
+    </customLabels>
+    <customLabels>
+        <label>Erreur</label>
+        <name>CV_Status_Error</name>
+    </customLabels>
+    <customLabels>
+        <label>Lead créée</label>
+        <name>CV_Status_Created</name>
+    </customLabels>
+    <customLabels>
+        <label>En attente</label>
+        <name>CV_Status_Idle</name>
+    </customLabels>
+    <customLabels>
+        <label>Succès</label>
+        <name>CV_Toast_SuccessTitle</name>
+    </customLabels>
+    <customLabels>
+        <label>Erreur</label>
+        <name>CV_Toast_ErrorTitle</name>
+    </customLabels>
+    <customLabels>
+        <label>1 Lead créée.</label>
+        <name>CV_Toast_LeadCreatedSingular</name>
+    </customLabels>
+    <customLabels>
+        <label>Leads créées.</label>
+        <name>CV_Toast_LeadCreatedPluralSuffix</name>
+    </customLabels>
+    <customLabels>
+        <label>Analyse échouée</label>
+        <name>CV_Error_AnalysisFailed</name>
+    </customLabels>
+</Translations>

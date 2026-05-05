@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Package xmlns="[http://soap.sforce.com/2006/04/metadata](http://soap.sforce.com/2006/04/metadata)">
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
+        <members>CV_CardProcessor</members>
+        <members>CV_CardProcessorTest</members>
         <members>CV_PromptJsonParser</members>
         <name>ApexClass</name>
     </types>
@@ -11,6 +13,55 @@
     <types>
         <members>ImageF</members>
         <name>GenAiPromptTemplate</name>
+    </types>
+    <types>
+        <members>cvCapture</members>
+        <members>cvDropZone</members>
+        <members>cvLeadCard</members>
+        <name>LightningComponentBundle</name>
+    </types>
+    <types>
+        <members>CV_AddMore</members>
+        <members>CV_Analyzing</members>
+        <members>CV_Card_Company</members>
+        <members>CV_Card_Email</members>
+        <members>CV_Card_FirstName</members>
+        <members>CV_Card_LastName</members>
+        <members>CV_Card_Mobile</members>
+        <members>CV_Card_Phone</members>
+        <members>CV_Card_Remove</members>
+        <members>CV_Card_RemoveTooltip</members>
+        <members>CV_Card_Retry</members>
+        <members>CV_Card_SeeLead</members>
+        <members>CV_ClearAll</members>
+        <members>CV_CounterReadyOf</members>
+        <members>CV_CreateLead_Singular</members>
+        <members>CV_CreateLeads</members>
+        <members>CV_CreateLeads_PluralPrefix</members>
+        <members>CV_CreateLeads_PluralSuffix</members>
+        <members>CV_Drop_Hint</members>
+        <members>CV_Drop_Title</members>
+        <members>CV_Error_AnalysisFailed</members>
+        <members>CV_ProcessingAlt</members>
+        <members>CV_ReadyInfo_PluralSuffix</members>
+        <members>CV_ReadyInfo_Singular</members>
+        <members>CV_Status_Created</members>
+        <members>CV_Status_Error</members>
+        <members>CV_Status_Idle</members>
+        <members>CV_Status_Processing</members>
+        <members>CV_Status_Ready</members>
+        <members>CV_Status_Uploading</members>
+        <members>CV_Subtitle</members>
+        <members>CV_Title</members>
+        <members>CV_Toast_ErrorTitle</members>
+        <members>CV_Toast_LeadCreatedPluralSuffix</members>
+        <members>CV_Toast_LeadCreatedSingular</members>
+        <members>CV_Toast_SuccessTitle</members>
+        <name>CustomLabel</name>
+    </types>
+    <types>
+        <members>fr</members>
+        <name>Translations</name>
     </types>
     <version>64.0</version>
 </Package>

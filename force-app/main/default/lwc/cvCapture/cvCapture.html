@@ -1,0 +1,77 @@
+<template>
+    <div class="cv-capture">
+        <header class="cv-capture__header">
+            <div>
+                <h1 class="cv-capture__title">{label.title}</h1>
+                <p class="cv-capture__subtitle">{label.subtitle}</p>
+            </div>
+            <template lwc:if={hasCards}>
+                <div class="cv-capture__counter" aria-live="polite">
+                    <span class="cv-capture__counter-num">{readyCount}</span>
+                    <span class="cv-capture__counter-label">{label.counterReadyOf} {totalCount}</span>
+                </div>
+            </template>
+        </header>
+
+        <template lwc:if={noCards}>
+            <c-cv-drop-zone onfilesselected={handleFilesSelected}></c-cv-drop-zone>
+        </template>
+
+        <template lwc:if={hasCards}>
+            <div class="cv-capture__toolbar">
+                <lightning-button
+                    variant="neutral"
+                    label={label.addMore}
+                    icon-name="utility:add"
+                    onclick={handleAddMore}
+                ></lightning-button>
+                <lightning-button
+                    variant="destructive-text"
+                    label={label.clearAll}
+                    icon-name="utility:delete"
+                    onclick={handleClearAll}
+                ></lightning-button>
+            </div>
+            <input
+                type="file"
+                accept="image/*"
+                multiple
+                class="cv-capture__hidden-input"
+                lwc:ref="hiddenInput"
+                onchange={handleHiddenInputChange}
+            />
+
+            <div class="cv-capture__grid">
+                <template for:each={cards} for:item="card">
+                    <c-cv-lead-card
+                        key={card.id}
+                        card={card}
+                        onfieldchange={handleFieldChange}
+                        onremove={handleRemove}
+                        onretry={handleRetry}
+                    ></c-cv-lead-card>
+                </template>
+            </div>
+
+            <footer class="cv-capture__footer">
+                <div class="cv-capture__footer-info">
+                    <template lwc:if={readyCount}>
+                        <lightning-icon icon-name="utility:info" size="x-small" alternative-text=""></lightning-icon>
+                        <span>{readyInfoText}</span>
+                    </template>
+                    <template lwc:elseif={processingCount}>
+                        <lightning-spinner size="small" alternative-text={label.processingAlt}></lightning-spinner>
+                        <span>{label.analyzing}</span>
+                    </template>
+                </div>
+                <lightning-button
+                    variant="brand"
+                    label={createButtonLabel}
+                    icon-name="utility:new"
+                    disabled={cannotCreate}
+                    onclick={handleCreateAll}
+                ></lightning-button>
+            </footer>
+        </template>
+    </div>
+</template>

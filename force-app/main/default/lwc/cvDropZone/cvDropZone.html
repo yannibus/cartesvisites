@@ -1,0 +1,29 @@
+<template>
+    <div
+        class={zoneClass}
+        ondragenter={handleDragEnter}
+        ondragover={handleDragOver}
+        ondragleave={handleDragLeave}
+        ondrop={handleDrop}
+        onclick={handleClick}
+        role="button"
+        tabindex="0"
+        onkeydown={handleKeydown}
+    >
+        <div class="cv-dropzone__inner">
+            <div class="cv-dropzone__icon" aria-hidden="true">
+                <lightning-icon icon-name="utility:upload" size="large" alternative-text=""></lightning-icon>
+            </div>
+            <p class="cv-dropzone__title">{effectiveTitle}</p>
+            <p class="cv-dropzone__hint">{effectiveHint}</p>
+        </div>
+        <input
+            type="file"
+            accept="image/*"
+            multiple
+            class="cv-dropzone__input"
+            lwc:ref="fileInput"
+            onchange={handleFileChange}
+        />
+    </div>
+</template>

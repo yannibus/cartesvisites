@@ -1,0 +1,107 @@
+<template>
+    <article class={cardClass}>
+        <header class="cv-card__header">
+            <div class="cv-card__thumb" aria-hidden="true">
+                <template lwc:if={previewUrl}>
+                    <img src={previewUrl} alt="" class="cv-card__img" />
+                </template>
+                <template lwc:else>
+                    <lightning-icon icon-name="utility:image" size="medium" alternative-text=""></lightning-icon>
+                </template>
+            </div>
+            <div class="cv-card__meta">
+                <p class="cv-card__title" title={card.title}>{card.title}</p>
+                <lightning-badge label={statusLabel} class={badgeClass}></lightning-badge>
+            </div>
+            <lightning-button-icon
+                icon-name="utility:close"
+                alternative-text={label.remove}
+                variant="bare"
+                onclick={handleRemove}
+                class="cv-card__remove"
+                title={label.removeTooltip}
+            ></lightning-button-icon>
+        </header>
+
+        <template lwc:if={isProcessing}>
+            <div class="cv-card__skeleton">
+                <div class="cv-card__skeleton-line"></div>
+                <div class="cv-card__skeleton-line cv-card__skeleton-line--short"></div>
+                <div class="cv-card__skeleton-line"></div>
+                <div class="cv-card__skeleton-line cv-card__skeleton-line--short"></div>
+            </div>
+        </template>
+
+        <template lwc:if={isError}>
+            <div class="cv-card__error slds-p-around_small">
+                <lightning-icon icon-name="utility:error" size="x-small" variant="error" alternative-text=""></lightning-icon>
+                <span>{card.errorMessage}</span>
+                <lightning-button
+                    variant="neutral"
+                    label={label.retry}
+                    onclick={handleRetry}
+                    class="slds-m-top_x-small"
+                ></lightning-button>
+            </div>
+        </template>
+
+        <template lwc:if={isEditable}>
+            <div class="cv-card__form">
+                <lightning-input
+                    label={label.firstName}
+                    value={card.firstName}
+                    data-field="firstName"
+                    onchange={handleFieldChange}
+                    variant="label-inline"
+                ></lightning-input>
+                <lightning-input
+                    label={label.lastName}
+                    required
+                    value={card.lastName}
+                    data-field="lastName"
+                    onchange={handleFieldChange}
+                    variant="label-inline"
+                ></lightning-input>
+                <lightning-input
+                    label={label.company}
+                    required
+                    value={card.company}
+                    data-field="company"
+                    onchange={handleFieldChange}
+                    variant="label-inline"
+                ></lightning-input>
+                <lightning-input
+                    type="email"
+                    label={label.email}
+                    value={card.email}
+                    data-field="email"
+                    onchange={handleFieldChange}
+                    variant="label-inline"
+                ></lightning-input>
+                <lightning-input
+                    type="tel"
+                    label={label.mobile}
+                    value={card.mobile}
+                    data-field="mobile"
+                    onchange={handleFieldChange}
+                    variant="label-inline"
+                ></lightning-input>
+                <lightning-input
+                    type="tel"
+                    label={label.phone}
+                    value={card.phone}
+                    data-field="phone"
+                    onchange={handleFieldChange}
+                    variant="label-inline"
+                ></lightning-input>
+            </div>
+        </template>
+
+        <template lwc:if={isCreated}>
+            <div class="cv-card__success slds-p-around_small">
+                <lightning-icon icon-name="utility:success" size="small" variant="success" alternative-text=""></lightning-icon>
+                <a href={leadUrl} target="_blank" rel="noopener">{createdLeadLabel}</a>
+            </div>
+        </template>
+    </article>
+</template>
