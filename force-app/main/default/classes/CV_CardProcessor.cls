@@ -58,49 +58,14 @@ public with sharing class CV_CardProcessor {
     }
 
     @AuraEnabled
-    public static List<CreatedLead> createLeads(List<LeadDraft> drafts) {
-        if (drafts == null || drafts.isEmpty()) {
-            return new List<CreatedLead>();
-        }
-
-        List<Lead> toInsert = new List<Lead>();
-        for (LeadDraft d : drafts) {
-            Lead l = new Lead();
-            l.FirstName   = d.firstName;
-            l.LastName    = String.isNotBlank(d.lastName) ? d.lastName : 'Unknown';
-            l.Company     = String.isNotBlank(d.company) ? d.company : 'Unknown';
-            l.Email       = d.email;
-            l.MobilePhone = d.mobile;
-            l.Phone       = d.phone;
-            l.LeadSource  = 'Business Card';
-            toInsert.add(l);
-        }
-        insert toInsert;
-
-        List<ContentDocumentLink> links = new List<ContentDocumentLink>();
-        for (Integer i = 0; i < toInsert.size(); i++) {
-            Id cdId = drafts[i].contentDocumentId;
-            if (cdId == null) continue;
-            ContentDocumentLink link = new ContentDocumentLink();
-            link.ContentDocumentId = cdId;
-            link.LinkedEntityId    = toInsert[i].Id;
-            link.ShareType         = 'V';
-            link.Visibility        = 'AllUsers';
-            links.add(link);
-        }
-        if (!links.isEmpty()) {
-            insert links;
-        }
-
-        List<CreatedLead> out = new List<CreatedLead>();
-        for (Integer i = 0; i < toInsert.size(); i++) {
-            CreatedLead cl = new CreatedLead();
-            cl.leadId = toInsert[i].Id;
-            cl.contentDocumentId = drafts[i].contentDocumentId;
-            cl.name = (String.isNotBlank(toInsert[i].FirstName) ? toInsert[i].FirstName + ' ' : '') + toInsert[i].LastName;
-            out.add(cl);
-        }
-        return out;
+    public static void linkCardToLead(Id contentDocumentId, Id leadId) {
+        if (contentDocumentId == null || leadId == null) return;
+        ContentDocumentLink link = new ContentDocumentLink();
+        link.ContentDocumentId = contentDocumentId;
+        link.LinkedEntityId    = leadId;
+        link.ShareType         = 'V';
+        link.Visibility        = 'AllUsers';
+        insert link;
     }
 
     private static String invokePromptTemplate(ContentDocument doc) {
@@ -131,16 +96,6 @@ public with sharing class CV_CardProcessor {
         return response.generations[0].text;
     }
 
-    public class LeadDraft {
-        @AuraEnabled public Id contentDocumentId;
-        @AuraEnabled public String firstName;
-        @AuraEnabled public String lastName;
-        @AuraEnabled public String company;
-        @AuraEnabled public String email;
-        @AuraEnabled public String mobile;
-        @AuraEnabled public String phone;
-    }
-
     public class CardResult {
         @AuraEnabled public Id contentDocumentId;
         @AuraEnabled public String title;
@@ -153,12 +108,6 @@ public with sharing class CV_CardProcessor {
         @AuraEnabled public String rawResponse;
         @AuraEnabled public String status;
         @AuraEnabled public String errorMessage;
-    }
-
-    public class CreatedLead {
-        @AuraEnabled public Id leadId;
-        @AuraEnabled public Id contentDocumentId;
-        @AuraEnabled public String name;
     }
 
     public class CV_ProcessorException extends Exception {}

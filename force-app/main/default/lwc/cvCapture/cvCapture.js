@@ -1,8 +1,9 @@
 import { LightningElement, track } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { createRecord } from 'lightning/uiRecordApi';
 import uploadCard from '@salesforce/apex/CV_CardProcessor.uploadCard';
 import processCard from '@salesforce/apex/CV_CardProcessor.processCard';
-import createLeads from '@salesforce/apex/CV_CardProcessor.createLeads';
+import linkCardToLead from '@salesforce/apex/CV_CardProcessor.linkCardToLead';
 
 import CV_Title from '@salesforce/label/c.CV_Title';
 import CV_Subtitle from '@salesforce/label/c.CV_Subtitle';
@@ -208,33 +209,45 @@ export default class CvCapture extends LightningElement {
         const readyCards = this.cards.filter(c => c.status === STATUS.READY);
         if (!readyCards.length) return;
 
-        const drafts = readyCards.map(c => ({
-            contentDocumentId: c.contentDocumentId,
-            firstName: c.firstName,
-            lastName: c.lastName,
-            company: c.company,
-            email: c.email,
-            mobile: c.mobile,
-            phone: c.phone
-        }));
-
-        try {
-            const created = await createLeads({ drafts });
-            const byDocId = new Map(
-                created.map(cl => [cl.contentDocumentId, cl.leadId])
-            );
-            this.cards = this.cards.map(c => {
-                if (c.status === STATUS.READY && byDocId.has(c.contentDocumentId)) {
-                    return { ...c, status: STATUS.CREATED, leadId: byDocId.get(c.contentDocumentId) };
+        const createdByCardId = new Map();
+        const errors = [];
+        for (const c of readyCards) {
+            try {
+                const lead = await createRecord({
+                    apiName: 'Lead',
+                    fields: {
+                        FirstName: c.firstName,
+                        LastName: c.lastName || 'Unknown',
+                        Company: c.company || 'Unknown',
+                        Email: c.email,
+                        MobilePhone: c.mobile,
+                        Phone: c.phone,
+                        LeadSource: 'Business Card'
+                    }
+                });
+                createdByCardId.set(c.id, lead.id);
+                if (c.contentDocumentId) {
+                    linkCardToLead({ contentDocumentId: c.contentDocumentId, leadId: lead.id })
+                        .catch(err => console.error('linkCardToLead failed', err));
                 }
-                return c;
-            });
-            const msg = created.length > 1
-                ? `${created.length} ${CV_Toast_LeadCreatedPluralSuffix}`
+            } catch (error) {
+                errors.push(this.extractError(error));
+            }
+        }
+
+        if (createdByCardId.size) {
+            this.cards = this.cards.map(c =>
+                createdByCardId.has(c.id)
+                    ? { ...c, status: STATUS.CREATED, leadId: createdByCardId.get(c.id) }
+                    : c
+            );
+            const msg = createdByCardId.size > 1
+                ? `${createdByCardId.size} ${CV_Toast_LeadCreatedPluralSuffix}`
                 : CV_Toast_LeadCreatedSingular;
             this.toast(CV_Toast_SuccessTitle, msg, 'success');
-        } catch (error) {
-            this.toast(CV_Toast_ErrorTitle, this.extractError(error), 'error');
+        }
+        if (errors.length) {
+            this.toast(CV_Toast_ErrorTitle, errors.join(' | '), 'error');
         }
     }
 

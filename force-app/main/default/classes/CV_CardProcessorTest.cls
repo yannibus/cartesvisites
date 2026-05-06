@@ -18,7 +18,7 @@ private class CV_CardProcessorTest {
     }
 
     @IsTest
-    static void createLeads_creates_leads_and_links_documents() {
+    static void linkCardToLead_links_document_to_lead() {
         ContentVersion cv = new ContentVersion(
             Title = 'card.png',
             PathOnClient = 'card.png',
@@ -28,52 +28,27 @@ private class CV_CardProcessorTest {
         insert cv;
         Id docId = [SELECT ContentDocumentId FROM ContentVersion WHERE Id = :cv.Id].ContentDocumentId;
 
-        CV_CardProcessor.LeadDraft draft = new CV_CardProcessor.LeadDraft();
-        draft.contentDocumentId = docId;
-        draft.firstName = 'Alice';
-        draft.lastName = 'Martin';
-        draft.company = 'Acme';
-        draft.email = 'alice@acme.com';
+        Lead l = new Lead(FirstName = 'Alice', LastName = 'Martin', Company = 'Acme');
+        insert l;
 
         Test.startTest();
-        List<CV_CardProcessor.CreatedLead> out = CV_CardProcessor.createLeads(
-            new List<CV_CardProcessor.LeadDraft>{ draft }
-        );
+        CV_CardProcessor.linkCardToLead(docId, l.Id);
         Test.stopTest();
-
-        System.assertEquals(1, out.size());
-        Lead created = [SELECT Id, FirstName, LastName, Company, Email FROM Lead WHERE Id = :out[0].leadId];
-        System.assertEquals('Alice', created.FirstName);
-        System.assertEquals('Acme', created.Company);
 
         Integer linkCount = [
             SELECT COUNT()
             FROM ContentDocumentLink
-            WHERE LinkedEntityId = :created.Id AND ContentDocumentId = :docId
+            WHERE LinkedEntityId = :l.Id AND ContentDocumentId = :docId
         ];
         System.assertEquals(1, linkCount);
     }
 
     @IsTest
-    static void createLeads_uses_fallbacks_when_missing() {
-        CV_CardProcessor.LeadDraft draft = new CV_CardProcessor.LeadDraft();
-        draft.firstName = 'NoLastName';
-        // no lastName, no company
+    static void linkCardToLead_noop_when_null() {
         Test.startTest();
-        List<CV_CardProcessor.CreatedLead> out = CV_CardProcessor.createLeads(
-            new List<CV_CardProcessor.LeadDraft>{ draft }
-        );
+        CV_CardProcessor.linkCardToLead(null, null);
         Test.stopTest();
-
-        Lead created = [SELECT LastName, Company FROM Lead WHERE Id = :out[0].leadId];
-        System.assertEquals('Unknown', created.LastName);
-        System.assertEquals('Unknown', created.Company);
-    }
-
-    @IsTest
-    static void createLeads_empty_list_returns_empty() {
-        List<CV_CardProcessor.CreatedLead> out = CV_CardProcessor.createLeads(null);
-        System.assertEquals(0, out.size());
+        // No exception expected
     }
 
     @IsTest
