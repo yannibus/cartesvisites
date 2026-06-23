@@ -7,8 +7,8 @@
         <name>ApexClass</name>
     </types>
     <types>
-        <members>Charger_une_CV</members>
-        <name>Flow</name>
+        <members>SDO_Sales_Home_SalesApp</members>
+        <name>FlexiPage</name>
     </types>
     <types>
         <members>ImageF</members>
