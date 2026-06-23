@@ -103,5 +103,15 @@
                 <a href={leadUrl} target="_blank" rel="noopener">{createdLeadLabel}</a>
             </div>
         </template>
+
+        <template lwc:if={isDuplicate}>
+            <div class="cv-card__duplicate slds-p-around_small">
+                <div class="cv-card__duplicate-head">
+                    <lightning-icon icon-name="utility:merge" size="small" variant="warning" alternative-text=""></lightning-icon>
+                    <span>{label.duplicateInfo}</span>
+                </div>
+                <a href={duplicateLeadUrl} target="_blank" rel="noopener">{duplicateLeadLabel}</a>
+            </div>
+        </template>
     </article>
 </template>

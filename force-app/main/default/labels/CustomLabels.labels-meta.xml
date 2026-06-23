@@ -281,6 +281,38 @@
         <value>Leads created.</value>
     </labels>
     <labels>
+        <fullName>CV_Status_Duplicate</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Duplicate status badge</shortDescription>
+        <value>Already exists</value>
+    </labels>
+    <labels>
+        <fullName>CV_Card_SeeExisting</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Link to the pre-existing matching lead</shortDescription>
+        <value>View existing Lead</value>
+    </labels>
+    <labels>
+        <fullName>CV_Card_DuplicateInfo</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Duplicate detected explanation on the card</shortDescription>
+        <value>A matching Lead already exists in Salesforce.</value>
+    </labels>
+    <labels>
+        <fullName>CV_Toast_DuplicateSuffix</fullName>
+        <categories>CartesVisitesAI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Toast suffix when N duplicates were detected</shortDescription>
+        <value>duplicate(s) detected</value>
+    </labels>
+    <labels>
         <fullName>CV_Error_AnalysisFailed</fullName>
         <categories>CartesVisitesAI</categories>
         <language>en_US</language>

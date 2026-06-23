@@ -29,9 +29,11 @@
         <members>CV_Card_LastName</members>
         <members>CV_Card_Mobile</members>
         <members>CV_Card_Phone</members>
+        <members>CV_Card_DuplicateInfo</members>
         <members>CV_Card_Remove</members>
         <members>CV_Card_RemoveTooltip</members>
         <members>CV_Card_Retry</members>
+        <members>CV_Card_SeeExisting</members>
         <members>CV_Card_SeeLead</members>
         <members>CV_ClearAll</members>
         <members>CV_CounterReadyOf</members>
@@ -46,6 +48,7 @@
         <members>CV_ReadyInfo_PluralSuffix</members>
         <members>CV_ReadyInfo_Singular</members>
         <members>CV_Status_Created</members>
+        <members>CV_Status_Duplicate</members>
         <members>CV_Status_Error</members>
         <members>CV_Status_Idle</members>
         <members>CV_Status_Processing</members>
@@ -53,6 +56,7 @@
         <members>CV_Status_Uploading</members>
         <members>CV_Subtitle</members>
         <members>CV_Title</members>
+        <members>CV_Toast_DuplicateSuffix</members>
         <members>CV_Toast_ErrorTitle</members>
         <members>CV_Toast_LeadCreatedPluralSuffix</members>
         <members>CV_Toast_LeadCreatedSingular</members>

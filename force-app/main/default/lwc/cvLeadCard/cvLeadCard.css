@@ -40,6 +40,10 @@
     border-color: var(--slds-g-color-success-container-1, #2e844a);
 }
 
+.cv-card--duplicate {
+    border-color: var(--slds-g-color-warning-container-1, #fe9339);
+}
+
 .cv-card__header {
     display: grid;
     grid-template-columns: 4.5rem 1fr auto;
@@ -133,20 +137,31 @@
 }
 
 .cv-card__error,
-.cv-card__success {
+.cv-card__success,
+.cv-card__duplicate {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
 }
 
-.cv-card__success a {
+.cv-card__duplicate-head {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: var(--slds-g-color-warning-1, #8c4b02);
+}
+
+.cv-card__success a,
+.cv-card__duplicate a {
     color: var(--slds-g-color-accent-container-1, #0176d3);
     font-weight: 600;
     text-decoration: none;
 }
 
-.cv-card__success a:hover {
+.cv-card__success a:hover,
+.cv-card__duplicate a:hover {
     text-decoration: underline;
 }
 

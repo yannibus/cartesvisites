@@ -144,4 +144,20 @@
         <label>Analyse échouée</label>
         <name>CV_Error_AnalysisFailed</name>
     </customLabels>
+    <customLabels>
+        <label>Existe déjà</label>
+        <name>CV_Status_Duplicate</name>
+    </customLabels>
+    <customLabels>
+        <label>Voir la Lead existante</label>
+        <name>CV_Card_SeeExisting</name>
+    </customLabels>
+    <customLabels>
+        <label>Une Lead correspondante existe déjà dans Salesforce.</label>
+        <name>CV_Card_DuplicateInfo</name>
+    </customLabels>
+    <customLabels>
+        <label>doublon(s) détecté(s)</label>
+        <name>CV_Toast_DuplicateSuffix</name>
+    </customLabels>
 </Translations>

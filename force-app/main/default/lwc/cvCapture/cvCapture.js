@@ -1,8 +1,8 @@
 import { LightningElement, track } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
-import { createRecord } from 'lightning/uiRecordApi';
 import uploadCard from '@salesforce/apex/CV_CardProcessor.uploadCard';
 import processCard from '@salesforce/apex/CV_CardProcessor.processCard';
+import createLead from '@salesforce/apex/CV_CardProcessor.createLead';
 import linkCardToLead from '@salesforce/apex/CV_CardProcessor.linkCardToLead';
 
 import CV_Title from '@salesforce/label/c.CV_Title';
@@ -23,13 +23,15 @@ import CV_Toast_ErrorTitle from '@salesforce/label/c.CV_Toast_ErrorTitle';
 import CV_Toast_LeadCreatedSingular from '@salesforce/label/c.CV_Toast_LeadCreatedSingular';
 import CV_Toast_LeadCreatedPluralSuffix from '@salesforce/label/c.CV_Toast_LeadCreatedPluralSuffix';
 import CV_Error_AnalysisFailed from '@salesforce/label/c.CV_Error_AnalysisFailed';
+import CV_Toast_DuplicateSuffix from '@salesforce/label/c.CV_Toast_DuplicateSuffix';
 
 const STATUS = {
     UPLOADING: 'uploading',
     PROCESSING: 'processing',
     READY: 'ready',
     ERROR: 'error',
-    CREATED: 'created'
+    CREATED: 'created',
+    DUPLICATE: 'duplicate'
 };
 
 let cardSeq = 0;
@@ -209,42 +211,69 @@ export default class CvCapture extends LightningElement {
         const readyCards = this.cards.filter(c => c.status === STATUS.READY);
         if (!readyCards.length) return;
 
-        const createdByCardId = new Map();
+        const patches = new Map();
         const errors = [];
+        let createdCount = 0;
+        let duplicateCount = 0;
+
         for (const c of readyCards) {
             try {
-                const lead = await createRecord({
-                    apiName: 'Lead',
-                    fields: {
-                        FirstName: c.firstName,
-                        LastName: c.lastName || 'Unknown',
-                        Company: c.company || 'Unknown',
-                        Email: c.email,
-                        MobilePhone: c.mobile,
-                        Phone: c.phone,
-                        LeadSource: 'Business Card'
-                    }
+                const result = await createLead({
+                    firstName: c.firstName,
+                    lastName: c.lastName,
+                    company: c.company,
+                    email: c.email,
+                    mobile: c.mobile,
+                    phone: c.phone,
+                    leadSource: 'Business Card'
                 });
-                createdByCardId.set(c.id, lead.id);
-                if (c.contentDocumentId) {
-                    linkCardToLead({ contentDocumentId: c.contentDocumentId, leadId: lead.id })
-                        .catch(err => console.error('linkCardToLead failed', err));
+
+                if (result.status === 'duplicate') {
+                    duplicateCount++;
+                    patches.set(c.id, {
+                        status: STATUS.DUPLICATE,
+                        leadId: result.leadId,
+                        duplicateLeadId: result.duplicateLeadId
+                    });
+                    // A new record was still saved (allowSave) → keep the photo linked.
+                    if (result.leadId && c.contentDocumentId) {
+                        linkCardToLead({ contentDocumentId: c.contentDocumentId, leadId: result.leadId })
+                            .catch(err => console.error('linkCardToLead failed', err));
+                    }
+                } else if (result.status === 'created') {
+                    createdCount++;
+                    patches.set(c.id, { status: STATUS.CREATED, leadId: result.leadId });
+                    if (c.contentDocumentId) {
+                        linkCardToLead({ contentDocumentId: c.contentDocumentId, leadId: result.leadId })
+                            .catch(err => console.error('linkCardToLead failed', err));
+                    }
+                } else {
+                    errors.push(result.errorMessage || CV_Error_AnalysisFailed);
                 }
             } catch (error) {
                 errors.push(this.extractError(error));
             }
         }
 
-        if (createdByCardId.size) {
+        if (patches.size) {
             this.cards = this.cards.map(c =>
-                createdByCardId.has(c.id)
-                    ? { ...c, status: STATUS.CREATED, leadId: createdByCardId.get(c.id) }
-                    : c
+                patches.has(c.id) ? { ...c, ...patches.get(c.id) } : c
             );
-            const msg = createdByCardId.size > 1
-                ? `${createdByCardId.size} ${CV_Toast_LeadCreatedPluralSuffix}`
-                : CV_Toast_LeadCreatedSingular;
-            this.toast(CV_Toast_SuccessTitle, msg, 'success');
+        }
+
+        const successMsgs = [];
+        if (createdCount) {
+            successMsgs.push(
+                createdCount > 1
+                    ? `${createdCount} ${CV_Toast_LeadCreatedPluralSuffix}`
+                    : CV_Toast_LeadCreatedSingular
+            );
+        }
+        if (duplicateCount) {
+            successMsgs.push(`${duplicateCount} ${CV_Toast_DuplicateSuffix}`);
+        }
+        if (successMsgs.length) {
+            this.toast(CV_Toast_SuccessTitle, successMsgs.join(' • '), 'success');
         }
         if (errors.length) {
             this.toast(CV_Toast_ErrorTitle, errors.join(' | '), 'error');
